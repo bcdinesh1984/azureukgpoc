@@ -119,6 +119,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"pipe_tablename": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
