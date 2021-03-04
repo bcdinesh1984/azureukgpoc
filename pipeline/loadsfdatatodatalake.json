@@ -124,7 +124,8 @@
 		],
 		"parameters": {
 			"pipe_tablename": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "[object_ctrl_table]"
 			}
 		},
 		"annotations": []
