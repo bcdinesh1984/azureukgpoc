@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "DSAzureSqlTableukg",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabaseukg",
