@@ -103,7 +103,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@concat(item().sf_object_name,'.csv')",
+											"value": "item().sf_object_name",
 											"type": "Expression"
 										}
 									}
