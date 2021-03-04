@@ -55,7 +55,7 @@
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "getmaxdate",
+									"activity": "sp_to_updatehighwatermark",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -162,7 +162,7 @@
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "CopydatatoDL",
+									"activity": "getmaxdate",
 									"dependencyConditions": [
 										"Succeeded"
 									]
