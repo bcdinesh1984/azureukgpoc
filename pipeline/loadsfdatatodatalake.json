@@ -215,7 +215,7 @@
 							"typeProperties": {
 								"variableName": "maxdate",
 								"value": {
-									"value": "@concat(activity('getmaxdate').output.firstrow.value,'Z')",
+									"value": "concat(@{activity('getmaxdate').output.firstrow.value},'Z')\n",
 									"type": "Expression"
 								}
 							}
