@@ -82,8 +82,12 @@
 								},
 								"enableStaging": false,
 								"translator": {
-									"value": "@item().sf_object_name",
-									"type": "Expression"
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
 								}
 							},
 							"inputs": [
