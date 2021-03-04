@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * from @{pipeline().parameters.pipe_tablename}",
+							"value": "SELECT * from @{pipeline().parameters.pipe_tablename} where enabled = 1",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -53,7 +53,14 @@
 						{
 							"name": "CopydatatoDL",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "getmaxdate",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -65,11 +72,10 @@
 							"typeProperties": {
 								"source": {
 									"type": "SalesforceSource",
-									"additionalColumns": [
-										{
-											"value": "$$COLUMN:"
-										}
-									],
+									"query": {
+										"value": "SELECT  @{item().All_Columns} FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{activity('getmaxdate').output.firstRow.maxd}\n\n",
+										"type": "Expression"
+									},
 									"readBehavior": "query"
 								},
 								"sink": {
@@ -99,7 +105,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"objectname": {
-											"value": "@item().sf_object_name",
+											"value": "@item().Source_object_name",
 											"type": "Expression"
 										}
 									}
@@ -117,6 +123,39 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "getmaxdate",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SalesforceSource",
+									"query": {
+										"value": "SELECT MAX(@{item().WatermarkColumn}) maxd FROM @{item().Source_object_name} where @{item().WatermarkColumn} >= @{item().WatermarkValue}",
+										"type": "Expression"
+									},
+									"readBehavior": "query"
+								},
+								"dataset": {
+									"referenceName": "DSSFFULLDEV",
+									"type": "DatasetReference",
+									"parameters": {
+										"objectname": {
+											"value": "@item().Source_object_name",
+											"type": "Expression"
+										}
+									}
+								}
+							}
 						}
 					]
 				}
