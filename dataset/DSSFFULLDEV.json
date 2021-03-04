@@ -1,0 +1,23 @@
+{
+	"name": "DSSFFULLDEV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Salesforce1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"objectname": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SalesforceObject",
+		"schema": [],
+		"typeProperties": {
+			"objectApiName": {
+				"value": "@dataset().objectname",
+				"type": "Expression"
+			}
+		}
+	}
+}
