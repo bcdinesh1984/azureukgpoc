@@ -73,7 +73,7 @@
 								"source": {
 									"type": "SalesforceSource",
 									"query": {
-										"value": "SELECT  @{item().All_Columns} FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{activity('getmaxdate').output.firstRow.maxd}\n\n",
+										"value": "SELECT  @{item().All_Columns} FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= concat(@{activity('getmaxdate').output.firstRow.maxd},'Z')\n\n",
 										"type": "Expression"
 									},
 									"readBehavior": "query"
@@ -199,6 +199,12 @@
 								"referenceName": "AzureSqlDatabaseukg",
 								"type": "LinkedServiceReference"
 							}
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": []
 						}
 					]
 				}
