@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from SF_Object_list_ctrl_tbl",
+						"sqlReaderQuery": {
+							"value": "SELECT * from @{pipeline().parameters.pipe_tablename}",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
