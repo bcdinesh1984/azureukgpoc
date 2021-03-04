@@ -117,7 +117,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@item().sf_object_name",
+											"value": "@item().Source_object_name",
 											"type": "Expression"
 										}
 									}
