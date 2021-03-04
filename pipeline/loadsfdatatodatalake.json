@@ -29,7 +29,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEach table",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -42,7 +42,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('lkp_sf_ctrl_table').output.sf_object_name",
+						"value": "@activity('lkp_sf_ctrl_table').output.value",
 						"type": "Expression"
 					},
 					"batchCount": 5,
