@@ -188,7 +188,7 @@
 									},
 									"NewWatermark": {
 										"value": {
-											"value": "@variables('maxdate')",
+											"value": "@concat(activity('getmaxdate').output.firstRow.maxd,'Z')",
 											"type": "Expression"
 										},
 										"type": "String"
