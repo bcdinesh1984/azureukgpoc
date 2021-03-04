@@ -216,6 +216,11 @@
 				"defaultValue": "object_ctrl_table"
 			}
 		},
+		"variables": {
+			"maxdate": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
