@@ -117,7 +117,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@concat(item().Source_object_name,'_',utcnow(),'.csv')",
+											"value": "@concat(item().Source_object_name,'.csv')",
 											"type": "Expression"
 										}
 									}
