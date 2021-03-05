@@ -19,7 +19,7 @@
 					"value": "@concat(dataset().filename,'.csv')",
 					"type": "Expression"
 				},
-				"folderPath": "Raw_Zone/dineshpoc/input",
+				"folderPath": "Raw_Zone/dineshpoc/rawzone/input",
 				"fileSystem": "ukgdatalakefspoc"
 			},
 			"columnDelimiter": ",",
