@@ -73,7 +73,7 @@
 								"source": {
 									"type": "SalesforceSource",
 									"query": {
-										"value": "SELECT  * FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{variables('maxdate')}\n\n",
+										"value": "SELECT  FIELDS(ALL) FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{variables('maxdate')}\n\n",
 										"type": "Expression"
 									},
 									"readBehavior": "query"
