@@ -22,7 +22,7 @@
 				}
 			],
 			"transformations": [],
-			"script": "parameters{\n\tfilename as string\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'ukgdatalakefspoc',\n\tfolderPath: (concat('Raw_Zone/dineshpoc/delta/',$filename))) ~> source1\nsource1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delimited',\n\tfileSystem: 'ukgdatalakefspoc',\n\tfolderPath: (concat('Raw_Zone/dineshpoc/staging/',$filename)),\n\tcolumnDelimiter: ',',\n\tescapeChar: '\\\\',\n\tqutoChar: '\\\"',\n\tcolumnNamesAsHeader: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+			"script": "parameters{\n\tfilename as string\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'ukgdatalakefspoc',\n\tfolderPath: (concat('Raw_Zone/dineshpoc/delta/',$filename))) ~> source1\nsource1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delimited',\n\tfileSystem: 'ukgdatalakefspoc',\n\tfolderPath: (concat('Raw_Zone/dineshpoc/staging/',$filename)),\n\ttruncate: true,\n\tcolumnDelimiter: ',',\n\tescapeChar: '\\\\',\n\tqutoChar: '\\\"',\n\tcolumnNamesAsHeader: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
