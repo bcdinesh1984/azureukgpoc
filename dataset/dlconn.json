@@ -23,6 +23,7 @@
 				"fileSystem": "ukgdatalakefspoc"
 			},
 			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
