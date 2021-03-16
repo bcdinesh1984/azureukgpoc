@@ -129,7 +129,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@item().Source_object_name",
+											"value": "@concat(item().Source_object_name,'.snappy.parquet')\n",
 											"type": "Expression"
 										}
 									}
@@ -271,43 +271,6 @@
 												"value": "@item().Source_object_name",
 												"type": "Expression"
 											}
-										}
-									}
-								},
-								"compute": {
-									"coreCount": 8,
-									"computeType": "General"
-								},
-								"traceLevel": "Coarse"
-							}
-						},
-						{
-							"name": "copy data from Delta Lake to Data Lake Staging",
-							"type": "ExecuteDataFlow",
-							"dependsOn": [
-								{
-									"activity": "copy data from Data Lake to Delta Lake",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"dataflow": {
-									"referenceName": "deltatostagefolder",
-									"type": "DataFlowReference",
-									"parameters": {
-										"filename": {
-											"value": "'@{item().Source_object_name}'",
-											"type": "Expression"
 										}
 									}
 								},
