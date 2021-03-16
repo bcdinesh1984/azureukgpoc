@@ -247,7 +247,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataflow": {
-									"referenceName": "dataflow1",
+									"referenceName": "dataflow1_Parquet",
 									"type": "DataFlowReference",
 									"parameters": {
 										"filename": {
@@ -257,6 +257,14 @@
 										"keyfield": {
 											"value": "'@{item().keyfield}'",
 											"type": "Expression"
+										}
+									},
+									"datasetParameters": {
+										"sourceRawZone": {
+											"filename": {
+												"value": "@item().Source_object_name",
+												"type": "Expression"
+											}
 										}
 									}
 								},
