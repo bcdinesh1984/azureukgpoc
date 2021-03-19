@@ -48,7 +48,7 @@
 						"value": "@activity('lkp_sf_ctrl_table').output.value",
 						"type": "Expression"
 					},
-					"batchCount": 5,
+					"batchCount": 3,
 					"activities": [
 						{
 							"name": "CopydatatoDL",
@@ -72,6 +72,12 @@
 							"typeProperties": {
 								"source": {
 									"type": "SalesforceSource",
+									"additionalColumns": [
+										{
+											"name": "file ",
+											"value": "$$COLUMN:"
+										}
+									],
 									"query": {
 										"value": "SELECT  @{item().All_Columns} FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{variables('maxdate')}",
 										"type": "Expression"
