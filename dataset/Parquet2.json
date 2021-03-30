@@ -19,7 +19,10 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"folderPath": "Raw_Zone/dineshpoc/rawzone/input",
+				"folderPath": {
+					"value": "@concat('Raw_Zone/dineshpoc/rawzone/input/',dataset().filename)",
+					"type": "Expression"
+				},
 				"fileSystem": "ukgdatalakefspoc"
 			},
 			"compressionCodec": "snappy"
