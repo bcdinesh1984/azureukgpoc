@@ -288,26 +288,6 @@
 						}
 					]
 				}
-			},
-			{
-				"name": "Set variable2",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "ForEach table",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "ErrorDetails",
-					"value": {
-						"value": "@activity('CopydatatoDL').Error.Messages",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"parameters": {
