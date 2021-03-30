@@ -300,6 +300,7 @@
 						]
 					}
 				],
+				"userProperties": [],
 				"typeProperties": {
 					"variableName": "ErrorDetails",
 					"value": {
