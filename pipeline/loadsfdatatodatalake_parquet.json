@@ -135,7 +135,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@concat(item().Source_object_name,'_',formatDateTime(utcnow(),'MM_dd_yyyy') ,'.snappy.parquet')\n\n\n",
+											"value": "@concat(item().Source_object_name,'_',formatDateTime(utcnow(),'MM_dd_yyyy'),'.snappy.parquet')\n\n\n",
 											"type": "Expression"
 										}
 									}
