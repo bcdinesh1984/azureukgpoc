@@ -274,7 +274,8 @@
 											"filename": {
 												"value": "@item().Source_object_name",
 												"type": "Expression"
-											}
+											},
+											"foldername": "@item().Source_object_name"
 										}
 									}
 								},
