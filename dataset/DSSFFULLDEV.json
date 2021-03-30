@@ -15,7 +15,7 @@
 		"schema": [],
 		"typeProperties": {
 			"objectApiName": {
-				"value": "Calendar",
+				"value": "@dataset().objectname",
 				"type": "Expression"
 			}
 		}
