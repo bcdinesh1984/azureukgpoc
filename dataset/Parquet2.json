@@ -20,7 +20,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat('Raw_Zone/dineshpoc/rawzone/input/',dataset().filename)",
+					"value": "Raw_Zone/dineshpoc/rawzone/input/",
 					"type": "Expression"
 				},
 				"fileSystem": "ukgdatalakefspoc"
