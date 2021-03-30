@@ -288,6 +288,25 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "ForEach table",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"typeProperties": {
+					"variableName": "ErrorDetails",
+					"value": {
+						"value": "@activity('CopydatatoDL').Error.Messages",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -298,6 +317,9 @@
 		},
 		"variables": {
 			"maxdate": {
+				"type": "String"
+			},
+			"ErrorDetails": {
 				"type": "String"
 			}
 		},
