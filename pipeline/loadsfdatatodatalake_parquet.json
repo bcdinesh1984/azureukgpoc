@@ -72,12 +72,6 @@
 							"typeProperties": {
 								"source": {
 									"type": "SalesforceSource",
-									"additionalColumns": [
-										{
-											"name": "file ",
-											"value": "$$COLUMN:"
-										}
-									],
 									"query": {
 										"value": "SELECT  @{item().All_Columns} FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{variables('maxdate')}",
 										"type": "Expression"
@@ -135,7 +129,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@concat(item().Source_object_name,'.snappy.parquet')\n\n",
+											"value": "@concat(item().Source_object_name,'_',formatDateTime(utcnow(),'MM_dd_yyyy'),'.snappy.parquet')",
 											"type": "Expression"
 										}
 									}
