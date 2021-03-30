@@ -131,6 +131,10 @@
 										"filename": {
 											"value": "@concat(item().Source_object_name,'_',formatDateTime(utcnow(),'MM_dd_yyyy'),'.snappy.parquet')",
 											"type": "Expression"
+										},
+										"foldername": {
+											"value": "item().Source_object_name",
+											"type": "Expression"
 										}
 									}
 								}
