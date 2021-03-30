@@ -48,7 +48,7 @@
 						"value": "@activity('lkp_sf_ctrl_table').output.value",
 						"type": "Expression"
 					},
-					"batchCount": 3,
+					"batchCount": 5,
 					"activities": [
 						{
 							"name": "CopydatatoDL",
