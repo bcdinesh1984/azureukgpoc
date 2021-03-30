@@ -133,7 +133,7 @@
 											"type": "Expression"
 										},
 										"foldername": {
-											"value": "item().Source_object_name",
+											"value": "@item().Source_object_name",
 											"type": "Expression"
 										}
 									}
