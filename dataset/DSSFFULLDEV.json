@@ -7,8 +7,7 @@
 		},
 		"parameters": {
 			"objectname": {
-				"type": "string",
-				"defaultValue": "**********"
+				"type": "string"
 			}
 		},
 		"annotations": [],
