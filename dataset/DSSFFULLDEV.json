@@ -8,7 +8,7 @@
 		"parameters": {
 			"objectname": {
 				"type": "string",
-				"defaultValue": "Account"
+				"defaultValue": "**********"
 			}
 		},
 		"annotations": [],
