@@ -259,7 +259,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-95.eastus.logic.azure.com:443/workflows/f020780146b84fb2844f3b488552e03b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=C1vIarn5-ZchtI5b596UQIG0SGRjI9GMbAVXPbsKpZ0",
+					"url": "https://prod-51.eastus.logic.azure.com:443/workflows/c001754f925f4a2f866c27d7ff41fbbe/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dOBsngQhAPUU5VlYdw_Qf7rBuaqml7MKrO5mG9uXU1g",
 					"method": "POST",
 					"body": {
 						"value": "{\n   \"title\": \"PIPELINERUN FINISHED\",\n   \"message\": \"DEMO PIPELINERUN FINISHED\",\n   \"color\": \"Green\",\n   \"datafactoryname\": \"@{pipeline().DataFactory}\",\n    \"pipelinename\": \"@{pipeline().Pipeline}\",\n   \"pipelinerunid\": \"@{pipeline().RunId}\",\n   \"time\": \"@{utcnow()}\"\n}",
