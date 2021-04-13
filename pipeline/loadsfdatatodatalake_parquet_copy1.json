@@ -235,56 +235,6 @@
 									"type": "Expression"
 								}
 							}
-						},
-						{
-							"name": "copy data from Data Lake to Delta Lake",
-							"type": "ExecuteDataFlow",
-							"dependsOn": [
-								{
-									"activity": "sp_to_updatehighwatermark",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"dataflow": {
-									"referenceName": "dataflow1_Parquet",
-									"type": "DataFlowReference",
-									"parameters": {
-										"filename": {
-											"value": "'@{item().Source_object_name}'",
-											"type": "Expression"
-										},
-										"keyfield": {
-											"value": "'@{item().keyfield}'",
-											"type": "Expression"
-										}
-									},
-									"datasetParameters": {
-										"sourceRawZone": {
-											"filename": {
-												"value": "@item().Source_object_name",
-												"type": "Expression"
-											},
-											"foldername": "@item().Source_object_name"
-										}
-									}
-								},
-								"compute": {
-									"coreCount": 8,
-									"computeType": "General"
-								},
-								"traceLevel": "Coarse"
-							}
 						}
 					]
 				}
