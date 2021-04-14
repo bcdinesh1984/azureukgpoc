@@ -6,11 +6,11 @@
 		"type": "AzureDatabricks",
 		"typeProperties": {
 			"domain": "https://adb-8474106774775046.6.azuredatabricks.net",
-			"instancePoolId": "0414-160514-duded217-pool-YK8B1gTx",
+			"instancePoolId": "0414-162710-leaky232-pool-NuN0WOIW",
 			"newClusterNumOfWorker": "1:2",
-			"newClusterVersion": "5.5.x-gpu-scala2.11",
+			"newClusterVersion": "8.2.x-scala2.12",
 			"newClusterInitScripts": [],
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlVLR0RBVEFGQUNUT1JZUE9DX2MyM2M0N2ExLTEyMDItNDE0Yy05NjQwLTA3MmE5YzQ4NmMzNiINCn0="
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlVLR0RBVEFGQUNUT1JZUE9DXzExOWUxNzg1LWRlNTMtNGMxOC1hYTdhLWI0YjNiY2JjZTdjOSINCn0="
 		}
 	}
 }
