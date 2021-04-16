@@ -1,0 +1,153 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ukgdatafactorypoc"
+		},
+		"AzureDataLakeStorageukg_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorageukg'"
+		},
+		"AzureDatabricksDeltaLake1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksDeltaLake1'"
+		},
+		"AzureDatabricksnotebook_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksnotebook'"
+		},
+		"AzureSqlDatabaseukg_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseukg'"
+		},
+		"Salesforce1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Salesforce1'"
+		},
+		"Salesforce1_securityToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'securityToken' of 'Salesforce1'"
+		},
+		"AzureDataLakeStorageMI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://ukgsynapsepoc.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorageukg_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://ukgsynapsepoc.dfs.core.windows.net"
+		},
+		"Httpgetwether_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Springfield,IL?unitGroup=us&key=AHBS12DVFHFFSHF764DGDB"
+		},
+		"Salesforce1_properties_typeProperties_environmentUrl": {
+			"type": "string",
+			"defaultValue": "https://test.salesforce.com"
+		},
+		"Salesforce1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "dinesh.chandran@kronos.com.fulldev"
+		},
+		"AzureDataLakeStorage1_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/2cfb1ffc-f925-4f8a-97c0-a08ebeae27b7/resourceGroups/ms-edw-poc/providers/Microsoft.Storage/storageAccounts/ukgsynapsepoc"
+		},
+		"AzureDataLakeStorage1_properties_groupId": {
+			"type": "string",
+			"defaultValue": "dfs"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ukgdatafactorypoc_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorageukg_accountKey": {
+						"value": "[parameters('AzureDataLakeStorageukg_accountKey')]"
+					},
+					"AzureDatabricksDeltaLake1_accessToken": {
+						"value": "[parameters('AzureDatabricksDeltaLake1_accessToken')]"
+					},
+					"AzureDatabricksnotebook_accessToken": {
+						"value": "[parameters('AzureDatabricksnotebook_accessToken')]"
+					},
+					"AzureSqlDatabaseukg_connectionString": {
+						"value": "[parameters('AzureSqlDatabaseukg_connectionString')]"
+					},
+					"Salesforce1_password": {
+						"value": "[parameters('Salesforce1_password')]"
+					},
+					"Salesforce1_securityToken": {
+						"value": "[parameters('Salesforce1_securityToken')]"
+					},
+					"AzureDataLakeStorageMI_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorageMI_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorageukg_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorageukg_properties_typeProperties_url')]"
+					},
+					"Httpgetwether_properties_typeProperties_url": {
+						"value": "[parameters('Httpgetwether_properties_typeProperties_url')]"
+					},
+					"Salesforce1_properties_typeProperties_environmentUrl": {
+						"value": "[parameters('Salesforce1_properties_typeProperties_environmentUrl')]"
+					},
+					"Salesforce1_properties_typeProperties_username": {
+						"value": "[parameters('Salesforce1_properties_typeProperties_username')]"
+					},
+					"AzureDataLakeStorage1_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_privateLinkResourceId')]"
+					},
+					"AzureDataLakeStorage1_properties_groupId": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_groupId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ukgdatafactorypoc_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ukgdatafactorypoc_ArmTemplate_0')]"
+			]
+		}
+	]
+}

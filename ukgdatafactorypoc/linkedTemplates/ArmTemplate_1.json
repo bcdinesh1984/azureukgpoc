@@ -1,0 +1,1597 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ukgdatafactorypoc"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "HttpReadSettings",
+									"requestMethod": "GET"
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['queryCost']"
+										},
+										"sink": {
+											"name": "queryCost"
+										}
+									},
+									{
+										"source": {
+											"path": "$['latitude']"
+										},
+										"sink": {
+											"name": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['longitude']"
+										},
+										"sink": {
+											"name": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['resolvedAddress']"
+										},
+										"sink": {
+											"name": "resolvedAddress"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']"
+										},
+										"sink": {
+											"name": "address"
+										}
+									},
+									{
+										"source": {
+											"path": "$['timezone']"
+										},
+										"sink": {
+											"name": "timezone"
+										}
+									},
+									{
+										"source": {
+											"path": "$['tzoffset']"
+										},
+										"sink": {
+											"name": "tzoffset"
+										}
+									},
+									{
+										"source": {
+											"path": "$['description']"
+										},
+										"sink": {
+											"name": "description"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['datetime']"
+										},
+										"sink": {
+											"name": "datetime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['datetimeEpoch']"
+										},
+										"sink": {
+											"name": "datetimeEpoch"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['tempmax']"
+										},
+										"sink": {
+											"name": "tempmax"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['tempmin']"
+										},
+										"sink": {
+											"name": "tempmin"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['temp']"
+										},
+										"sink": {
+											"name": "temp"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['feelslikemax']"
+										},
+										"sink": {
+											"name": "feelslikemax"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['feelslikemin']"
+										},
+										"sink": {
+											"name": "feelslikemin"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['feelslike']"
+										},
+										"sink": {
+											"name": "feelslike"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['dew']"
+										},
+										"sink": {
+											"name": "dew"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['humidity']"
+										},
+										"sink": {
+											"name": "humidity"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['precip']"
+										},
+										"sink": {
+											"name": "precip"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['precipprob']"
+										},
+										"sink": {
+											"name": "precipprob"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['precipcover']"
+										},
+										"sink": {
+											"name": "precipcover"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['preciptype']"
+										},
+										"sink": {
+											"name": "preciptype"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['snow']"
+										},
+										"sink": {
+											"name": "snow"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['snowdepth']"
+										},
+										"sink": {
+											"name": "snowdepth"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['windgust']"
+										},
+										"sink": {
+											"name": "windgust"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['windspeed']"
+										},
+										"sink": {
+											"name": "windspeed"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['winddir']"
+										},
+										"sink": {
+											"name": "winddir"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['pressure']"
+										},
+										"sink": {
+											"name": "pressure"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['cloudcover']"
+										},
+										"sink": {
+											"name": "cloudcover"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['visibility']"
+										},
+										"sink": {
+											"name": "visibility"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['solarradiation']"
+										},
+										"sink": {
+											"name": "solarradiation"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['solarenergy']"
+										},
+										"sink": {
+											"name": "solarenergy"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['uvindex']"
+										},
+										"sink": {
+											"name": "uvindex"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['severerisk']"
+										},
+										"sink": {
+											"name": "severerisk"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['sunrise']"
+										},
+										"sink": {
+											"name": "sunrise"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['sunriseEpoch']"
+										},
+										"sink": {
+											"name": "sunriseEpoch"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['sunset']"
+										},
+										"sink": {
+											"name": "sunset"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['sunsetEpoch']"
+										},
+										"sink": {
+											"name": "sunsetEpoch"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['moonphase']"
+										},
+										"sink": {
+											"name": "moonphase"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['conditions']"
+										},
+										"sink": {
+											"name": "conditions"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['description']"
+										},
+										"sink": {
+											"name": "description"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['icon']"
+										},
+										"sink": {
+											"name": "icon"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['stations'][0]"
+										},
+										"sink": {
+											"name": "items"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['source']"
+										},
+										"sink": {
+											"name": "source"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['datetime']"
+										},
+										"sink": {
+											"name": "datetime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['datetimeEpoch']"
+										},
+										"sink": {
+											"name": "datetimeEpoch"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['temp']"
+										},
+										"sink": {
+											"name": "temp"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['feelslike']"
+										},
+										"sink": {
+											"name": "feelslike"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['humidity']"
+										},
+										"sink": {
+											"name": "humidity"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['dew']"
+										},
+										"sink": {
+											"name": "dew"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['precip']"
+										},
+										"sink": {
+											"name": "precip"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['precipprob']"
+										},
+										"sink": {
+											"name": "precipprob"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['snow']"
+										},
+										"sink": {
+											"name": "snow"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['snowdepth']"
+										},
+										"sink": {
+											"name": "snowdepth"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['preciptype']"
+										},
+										"sink": {
+											"name": "preciptype"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['windgust']"
+										},
+										"sink": {
+											"name": "windgust"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['windspeed']"
+										},
+										"sink": {
+											"name": "windspeed"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['winddir']"
+										},
+										"sink": {
+											"name": "winddir"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['pressure']"
+										},
+										"sink": {
+											"name": "pressure"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['visibility']"
+										},
+										"sink": {
+											"name": "visibility"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['cloudcover']"
+										},
+										"sink": {
+											"name": "cloudcover"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['solarradiation']"
+										},
+										"sink": {
+											"name": "solarradiation"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['solarenergy']"
+										},
+										"sink": {
+											"name": "solarenergy"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['uvindex']"
+										},
+										"sink": {
+											"name": "uvindex"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['conditions']"
+										},
+										"sink": {
+											"name": "conditions"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['icon']"
+										},
+										"sink": {
+											"name": "icon"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['stations'][0]"
+										},
+										"sink": {
+											"name": "items"
+										}
+									},
+									{
+										"source": {
+											"path": "$['days'][0]['hours'][0]['source']"
+										},
+										"sink": {
+											"name": "source"
+										}
+									},
+									{
+										"source": {
+											"path": "$['alerts'][0]"
+										},
+										"sink": {
+											"name": "items"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['distance']"
+										},
+										"sink": {
+											"name": "distance"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['latitude']"
+										},
+										"sink": {
+											"name": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['longitude']"
+										},
+										"sink": {
+											"name": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['useCount']"
+										},
+										"sink": {
+											"name": "useCount"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['id']"
+										},
+										"sink": {
+											"name": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['name']"
+										},
+										"sink": {
+											"name": "name"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['quality']"
+										},
+										"sink": {
+											"name": "quality"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['K3LF']['contribution']"
+										},
+										"sink": {
+											"name": "contribution"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['distance']"
+										},
+										"sink": {
+											"name": "distance"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['latitude']"
+										},
+										"sink": {
+											"name": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['longitude']"
+										},
+										"sink": {
+											"name": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['useCount']"
+										},
+										"sink": {
+											"name": "useCount"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['id']"
+										},
+										"sink": {
+											"name": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['name']"
+										},
+										"sink": {
+											"name": "name"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['quality']"
+										},
+										"sink": {
+											"name": "quality"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KSPI']['contribution']"
+										},
+										"sink": {
+											"name": "contribution"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['distance']"
+										},
+										"sink": {
+											"name": "distance"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['latitude']"
+										},
+										"sink": {
+											"name": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['longitude']"
+										},
+										"sink": {
+											"name": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['useCount']"
+										},
+										"sink": {
+											"name": "useCount"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['id']"
+										},
+										"sink": {
+											"name": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['name']"
+										},
+										"sink": {
+											"name": "name"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['quality']"
+										},
+										"sink": {
+											"name": "quality"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KDEC']['contribution']"
+										},
+										"sink": {
+											"name": "contribution"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['distance']"
+										},
+										"sink": {
+											"name": "distance"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['latitude']"
+										},
+										"sink": {
+											"name": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['longitude']"
+										},
+										"sink": {
+											"name": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['useCount']"
+										},
+										"sink": {
+											"name": "useCount"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['id']"
+										},
+										"sink": {
+											"name": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['name']"
+										},
+										"sink": {
+											"name": "name"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['quality']"
+										},
+										"sink": {
+											"name": "quality"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KAAA']['contribution']"
+										},
+										"sink": {
+											"name": "contribution"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['distance']"
+										},
+										"sink": {
+											"name": "distance"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['latitude']"
+										},
+										"sink": {
+											"name": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['longitude']"
+										},
+										"sink": {
+											"name": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['useCount']"
+										},
+										"sink": {
+											"name": "useCount"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['id']"
+										},
+										"sink": {
+											"name": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['name']"
+										},
+										"sink": {
+											"name": "name"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['quality']"
+										},
+										"sink": {
+											"name": "quality"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['KIJX']['contribution']"
+										},
+										"sink": {
+											"name": "contribution"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['distance']"
+										},
+										"sink": {
+											"name": "distance"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['latitude']"
+										},
+										"sink": {
+											"name": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['longitude']"
+										},
+										"sink": {
+											"name": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['useCount']"
+										},
+										"sink": {
+											"name": "useCount"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['id']"
+										},
+										"sink": {
+											"name": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['name']"
+										},
+										"sink": {
+											"name": "name"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['quality']"
+										},
+										"sink": {
+											"name": "quality"
+										}
+									},
+									{
+										"source": {
+											"path": "$['stations']['F4825']['contribution']"
+										},
+										"sink": {
+											"name": "contribution"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['datetime']"
+										},
+										"sink": {
+											"name": "datetime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['datetimeEpoch']"
+										},
+										"sink": {
+											"name": "datetimeEpoch"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['temp']"
+										},
+										"sink": {
+											"name": "temp"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['feelslike']"
+										},
+										"sink": {
+											"name": "feelslike"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['humidity']"
+										},
+										"sink": {
+											"name": "humidity"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['dew']"
+										},
+										"sink": {
+											"name": "dew"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['precip']"
+										},
+										"sink": {
+											"name": "precip"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['precipprob']"
+										},
+										"sink": {
+											"name": "precipprob"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['snow']"
+										},
+										"sink": {
+											"name": "snow"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['snowdepth']"
+										},
+										"sink": {
+											"name": "snowdepth"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['preciptype']"
+										},
+										"sink": {
+											"name": "preciptype"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['windgust']"
+										},
+										"sink": {
+											"name": "windgust"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['windspeed']"
+										},
+										"sink": {
+											"name": "windspeed"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['winddir']"
+										},
+										"sink": {
+											"name": "winddir"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['pressure']"
+										},
+										"sink": {
+											"name": "pressure"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['visibility']"
+										},
+										"sink": {
+											"name": "visibility"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['cloudcover']"
+										},
+										"sink": {
+											"name": "cloudcover"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['solarradiation']"
+										},
+										"sink": {
+											"name": "solarradiation"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['solarenergy']"
+										},
+										"sink": {
+											"name": "solarenergy"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['uvindex']"
+										},
+										"sink": {
+											"name": "uvindex"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['conditions']"
+										},
+										"sink": {
+											"name": "conditions"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['icon']"
+										},
+										"sink": {
+											"name": "icon"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['stations'][0]"
+										},
+										"sink": {
+											"name": "items"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['sunrise']"
+										},
+										"sink": {
+											"name": "sunrise"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['sunriseEpoch']"
+										},
+										"sink": {
+											"name": "sunriseEpoch"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['sunset']"
+										},
+										"sink": {
+											"name": "sunset"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['sunsetEpoch']"
+										},
+										"sink": {
+											"name": "sunsetEpoch"
+										}
+									},
+									{
+										"source": {
+											"path": "$['currentConditions']['moonphase']"
+										},
+										"sink": {
+											"name": "moonphase"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Http_json",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dlconn",
+								"type": "DatasetReference",
+								"parameters": {
+									"filename": "weather.csv"
+								}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1_Parquet')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Parquet2",
+								"type": "DatasetReference"
+							},
+							"name": "sourceRawZone"
+						}
+					],
+					"sinks": [
+						{
+							"linkedService": {
+								"referenceName": "AzureDataLakeStorageukg",
+								"type": "LinkedServiceReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "AlterRow1"
+						}
+					],
+					"script": "parameters{\n\tfilename as string,\n\tkeyfield as string\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tmoveFiles: ['Raw_Zone/dineshpoc/rawzone/input','Raw_Zone/dineshpoc/rawzone/processed'],\n\tformat: 'parquet',\n\twildcardPaths:[(concat('/Raw_Zone/dineshpoc/rawzone/input/',$filename,'/',$filename,'*'))]) ~> sourceRawZone\nsourceRawZone alterRow(upsertIf(true())) ~> AlterRow1\nAlterRow1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: 'ukgdatalakefspoc',\n\tfolderPath: (concat('Raw_Zone/dineshpoc/delta/',$filename)),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tkeys:[($keyfield)],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/loadsfdatatodatalake_parquet')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "lkp_sf_ctrl_table",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": {
+									"value": "SELECT * from @{pipeline().parameters.pipe_tablename} where enabled = 1",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DSAzureSqlTableukg",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach table",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "lkp_sf_ctrl_table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('lkp_sf_ctrl_table').output.value",
+								"type": "Expression"
+							},
+							"batchCount": 5,
+							"activities": [
+								{
+									"name": "CopydatatoDL",
+									"type": "Copy",
+									"dependsOn": [
+										{
+											"activity": "Set variable1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SalesforceSource",
+											"query": {
+												"value": "SELECT  @{item().All_Columns} FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{variables('maxdate')}",
+												"type": "Expression"
+											},
+											"readBehavior": "query"
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false,
+										"enableSkipIncompatibleRow": false,
+										"logSettings": {
+											"enableCopyActivityLog": true,
+											"copyActivityLogSettings": {
+												"logLevel": "Warning",
+												"enableReliableLogging": false
+											},
+											"logLocationSettings": {
+												"linkedServiceName": {
+													"referenceName": "AzureDataLakeStorageukg",
+													"type": "LinkedServiceReference"
+												}
+											}
+										},
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "DSSFFULLDEV",
+											"type": "DatasetReference",
+											"parameters": {
+												"objectname": {
+													"value": "@item().Source_object_name",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "Parquet2",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@concat(item().Source_object_name,'_',formatDateTime(utcnow(),'MM_dd_yyyy'),'.snappy.parquet')",
+													"type": "Expression"
+												},
+												"foldername": {
+													"value": "@item().Source_object_name",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"name": "getmaxdate",
+									"type": "Lookup",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SalesforceSource",
+											"query": {
+												"value": "SELECT MAX(@{item().WatermarkColumn}) maxd FROM @{item().Source_object_name} where @{item().WatermarkColumn} >= @{item().WatermarkValue}",
+												"type": "Expression"
+											},
+											"readBehavior": "query"
+										},
+										"dataset": {
+											"referenceName": "DSSFFULLDEV",
+											"type": "DatasetReference",
+											"parameters": {
+												"objectname": {
+													"value": "@item().Source_object_name",
+													"type": "Expression"
+												}
+											}
+										}
+									}
+								},
+								{
+									"name": "sp_to_updatehighwatermark",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "CopydatatoDL",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[sp_UpdateWatermark]",
+										"storedProcedureParameters": {
+											"id": {
+												"value": {
+													"value": "@item().id",
+													"type": "Expression"
+												},
+												"type": "Int16"
+											},
+											"NewWatermark": {
+												"value": {
+													"value": "@concat(activity('getmaxdate').output.firstRow.maxd,'Z')",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureSqlDatabaseukg",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "Set variable1",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "getmaxdate",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "maxdate",
+										"value": {
+											"value": "@concat(activity('getmaxdate').output.firstRow.maxd,'Z')\n",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "copy data from Data Lake to Delta Lake",
+									"type": "ExecuteDataFlow",
+									"dependsOn": [
+										{
+											"activity": "sp_to_updatehighwatermark",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataflow": {
+											"referenceName": "dataflow1_Parquet",
+											"type": "DataFlowReference",
+											"parameters": {
+												"filename": {
+													"value": "'@{item().Source_object_name}'",
+													"type": "Expression"
+												},
+												"keyfield": {
+													"value": "'@{item().keyfield}'",
+													"type": "Expression"
+												}
+											},
+											"datasetParameters": {
+												"sourceRawZone": {
+													"filename": {
+														"value": "@item().Source_object_name",
+														"type": "Expression"
+													},
+													"foldername": "@item().Source_object_name"
+												},
+												"sink1": {}
+											}
+										},
+										"staging": {},
+										"compute": {
+											"coreCount": 8,
+											"computeType": "General"
+										},
+										"traceLevel": "Coarse"
+									}
+								}
+							]
+						}
+					}
+				],
+				"parameters": {
+					"pipe_tablename": {
+						"type": "string",
+						"defaultValue": "object_ctrl_table"
+					}
+				},
+				"variables": {
+					"maxdate": {
+						"type": "String"
+					},
+					"ErrorDetails": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow1_Parquet')]"
+			]
+		}
+	]
+}
