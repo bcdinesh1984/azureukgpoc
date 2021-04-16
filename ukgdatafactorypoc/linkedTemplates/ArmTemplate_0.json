@@ -1322,300 +1322,40 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/loadsfdatatodatalake_parquet_copy1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/dataflow1_Parquet')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "lkp_sf_ctrl_table",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": {
-									"value": "SELECT * from @{pipeline().parameters.pipe_tablename} where enabled = 1",
-									"type": "Expression"
-								},
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
 							"dataset": {
-								"referenceName": "DSAzureSqlTableukg",
-								"type": "DatasetReference",
-								"parameters": {}
+								"referenceName": "Parquet2",
+								"type": "DatasetReference"
 							},
-							"firstRowOnly": false
+							"name": "sourceRawZone"
 						}
-					},
-					{
-						"name": "ForEach table",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "lkp_sf_ctrl_table",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('lkp_sf_ctrl_table').output.value",
-								"type": "Expression"
+					],
+					"sinks": [
+						{
+							"linkedService": {
+								"referenceName": "AzureDataLakeStorageukg",
+								"type": "LinkedServiceReference"
 							},
-							"batchCount": 5,
-							"activities": [
-								{
-									"name": "CopydatatoDL",
-									"type": "Copy",
-									"dependsOn": [
-										{
-											"activity": "Set variable1",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "SalesforceSource",
-											"query": {
-												"value": "SELECT  @{item().All_Columns} FROM @{item().Source_object_name} \n WHERE \n @{item().WatermarkColumn} > @{item().WatermarkValue}\nAND\n@{item().WatermarkColumn} <= @{variables('maxdate')}",
-												"type": "Expression"
-											},
-											"readBehavior": "query"
-										},
-										"sink": {
-											"type": "ParquetSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
-											"formatSettings": {
-												"type": "ParquetWriteSettings"
-											}
-										},
-										"enableStaging": false,
-										"enableSkipIncompatibleRow": false,
-										"logSettings": {
-											"enableCopyActivityLog": true,
-											"copyActivityLogSettings": {
-												"logLevel": "Warning",
-												"enableReliableLogging": false
-											},
-											"logLocationSettings": {
-												"linkedServiceName": {
-													"referenceName": "AzureDataLakeStorageukg",
-													"type": "LinkedServiceReference"
-												}
-											}
-										},
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "DSSFFULLDEV",
-											"type": "DatasetReference",
-											"parameters": {
-												"objectname": {
-													"value": "@item().Source_object_name",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "Parquet2",
-											"type": "DatasetReference",
-											"parameters": {
-												"filename": {
-													"value": "@concat(item().Source_object_name,'_',formatDateTime(utcnow(),'MM_dd_yyyy'),'.snappy.parquet')",
-													"type": "Expression"
-												},
-												"foldername": {
-													"value": "@item().Source_object_name",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								},
-								{
-									"name": "getmaxdate",
-									"type": "Lookup",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "SalesforceSource",
-											"query": {
-												"value": "SELECT MAX(@{item().WatermarkColumn}) maxd FROM @{item().Source_object_name} where @{item().WatermarkColumn} >= @{item().WatermarkValue}",
-												"type": "Expression"
-											},
-											"readBehavior": "query"
-										},
-										"dataset": {
-											"referenceName": "DSSFFULLDEV",
-											"type": "DatasetReference",
-											"parameters": {
-												"objectname": {
-													"value": "@item().Source_object_name",
-													"type": "Expression"
-												}
-											}
-										}
-									}
-								},
-								{
-									"name": "sp_to_updatehighwatermark",
-									"type": "SqlServerStoredProcedure",
-									"dependsOn": [
-										{
-											"activity": "CopydatatoDL",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"storedProcedureName": "[[dbo].[sp_UpdateWatermark]",
-										"storedProcedureParameters": {
-											"id": {
-												"value": {
-													"value": "@item().id",
-													"type": "Expression"
-												},
-												"type": "Int16"
-											},
-											"NewWatermark": {
-												"value": {
-													"value": "@concat(activity('getmaxdate').output.firstRow.maxd,'Z')",
-													"type": "Expression"
-												},
-												"type": "String"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureSqlDatabaseukg",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "Set variable1",
-									"type": "SetVariable",
-									"dependsOn": [
-										{
-											"activity": "getmaxdate",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "maxdate",
-										"value": {
-											"value": "@concat(activity('getmaxdate').output.firstRow.maxd,'Z')\n",
-											"type": "Expression"
-										}
-									}
-								}
-							]
+							"name": "sink1"
 						}
-					},
-					{
-						"name": "Web1",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "ForEach table",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-51.eastus.logic.azure.com:443/workflows/c001754f925f4a2f866c27d7ff41fbbe/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dOBsngQhAPUU5VlYdw_Qf7rBuaqml7MKrO5mG9uXU1g",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"value": "{\n   \"title\": \"PIPELINERUN FINISHED\",\n   \"message\": \"DEMO PIPELINERUN FINISHED\",\n   \"color\": \"Green\",\n   \"datafactoryname\": \"@{pipeline().DataFactory}\",\n    \"pipelinename\": \"@{pipeline().Pipeline}\",\n   \"pipelinerunid\": \"@{pipeline().RunId}\",\n   \"time\": \"@{utcnow()}\"\n}",
-								"type": "Expression"
-							}
+					],
+					"transformations": [
+						{
+							"name": "AlterRow1"
 						}
-					}
-				],
-				"parameters": {
-					"pipe_tablename": {
-						"type": "string",
-						"defaultValue": "object_ctrl_table"
-					}
-				},
-				"variables": {
-					"maxdate": {
-						"type": "String"
-					},
-					"ErrorDetails": {
-						"type": "String"
-					}
-				},
-				"annotations": []
+					],
+					"script": "parameters{\n\tfilename as string,\n\tkeyfield as string\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tmoveFiles: ['Raw_Zone/dineshpoc/rawzone/input','Raw_Zone/dineshpoc/rawzone/processed'],\n\tformat: 'parquet',\n\twildcardPaths:[(concat('/Raw_Zone/dineshpoc/rawzone/input/',$filename,'/',$filename,'*'))]) ~> sourceRawZone\nsourceRawZone alterRow(upsertIf(true())) ~> AlterRow1\nAlterRow1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delta',\n\tfileSystem: 'ukgdatalakefspoc',\n\tfolderPath: (concat('Raw_Zone/dineshpoc/delta/',$filename)),\n\tmergeSchema: true,\n\tautoCompact: false,\n\toptimizedWrite: false,\n\tvacuum: 0,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tkeys:[($keyfield)],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DSAzureSqlTableukg')]",
-				"[concat(variables('factoryId'), '/datasets/DSSFFULLDEV')]",
 				"[concat(variables('factoryId'), '/datasets/Parquet2')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabaseukg')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageukg')]"
 			]
 		}
