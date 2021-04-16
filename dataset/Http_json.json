@@ -1,0 +1,522 @@
+{
+	"name": "Http_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Httpgetwether",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Springfield,IL?unitGroup=us&key=AHBS12DVFHFFSHF764DGDB"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"queryCost": {
+					"type": "integer"
+				},
+				"latitude": {
+					"type": "number"
+				},
+				"longitude": {
+					"type": "number"
+				},
+				"resolvedAddress": {
+					"type": "string"
+				},
+				"address": {
+					"type": "string"
+				},
+				"timezone": {
+					"type": "string"
+				},
+				"tzoffset": {
+					"type": "integer"
+				},
+				"description": {
+					"type": "string"
+				},
+				"days": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"datetime": {
+								"type": "string"
+							},
+							"datetimeEpoch": {
+								"type": "integer"
+							},
+							"tempmax": {
+								"type": "number"
+							},
+							"tempmin": {
+								"type": "number"
+							},
+							"temp": {
+								"type": "number"
+							},
+							"feelslikemax": {
+								"type": "number"
+							},
+							"feelslikemin": {
+								"type": "number"
+							},
+							"feelslike": {
+								"type": "integer"
+							},
+							"dew": {
+								"type": "number"
+							},
+							"humidity": {
+								"type": "integer"
+							},
+							"precip": {
+								"type": "integer"
+							},
+							"precipprob": {
+								"type": "integer"
+							},
+							"precipcover": {
+								"type": "null"
+							},
+							"preciptype": {
+								"type": "null"
+							},
+							"snow": {
+								"type": "integer"
+							},
+							"snowdepth": {
+								"type": "integer"
+							},
+							"windgust": {
+								"type": "integer"
+							},
+							"windspeed": {
+								"type": "number"
+							},
+							"winddir": {
+								"type": "integer"
+							},
+							"pressure": {
+								"type": "number"
+							},
+							"cloudcover": {
+								"type": "integer"
+							},
+							"visibility": {
+								"type": "integer"
+							},
+							"solarradiation": {
+								"type": "number"
+							},
+							"solarenergy": {
+								"type": "number"
+							},
+							"uvindex": {
+								"type": "integer"
+							},
+							"severerisk": {
+								"type": "integer"
+							},
+							"sunrise": {
+								"type": "string"
+							},
+							"sunriseEpoch": {
+								"type": "integer"
+							},
+							"sunset": {
+								"type": "string"
+							},
+							"sunsetEpoch": {
+								"type": "integer"
+							},
+							"moonphase": {
+								"type": "number"
+							},
+							"conditions": {
+								"type": "string"
+							},
+							"description": {
+								"type": "string"
+							},
+							"icon": {
+								"type": "string"
+							},
+							"stations": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							},
+							"source": {
+								"type": "string"
+							},
+							"hours": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"datetime": {
+											"type": "string"
+										},
+										"datetimeEpoch": {
+											"type": "integer"
+										},
+										"temp": {
+											"type": "number"
+										},
+										"feelslike": {
+											"type": "number"
+										},
+										"humidity": {
+											"type": "number"
+										},
+										"dew": {
+											"type": "number"
+										},
+										"precip": {
+											"type": "null"
+										},
+										"precipprob": {
+											"type": "null"
+										},
+										"snow": {
+											"type": "integer"
+										},
+										"snowdepth": {
+											"type": "integer"
+										},
+										"preciptype": {
+											"type": "null"
+										},
+										"windgust": {
+											"type": "null"
+										},
+										"windspeed": {
+											"type": "integer"
+										},
+										"winddir": {
+											"type": "integer"
+										},
+										"pressure": {
+											"type": "number"
+										},
+										"visibility": {
+											"type": "number"
+										},
+										"cloudcover": {
+											"type": "integer"
+										},
+										"solarradiation": {
+											"type": "null"
+										},
+										"solarenergy": {
+											"type": "null"
+										},
+										"uvindex": {
+											"type": "integer"
+										},
+										"conditions": {
+											"type": "string"
+										},
+										"icon": {
+											"type": "string"
+										},
+										"stations": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"source": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"alerts": {
+					"type": "array"
+				},
+				"stations": {
+					"type": "object",
+					"properties": {
+						"K3LF": {
+							"type": "object",
+							"properties": {
+								"distance": {
+									"type": "integer"
+								},
+								"latitude": {
+									"type": "number"
+								},
+								"longitude": {
+									"type": "number"
+								},
+								"useCount": {
+									"type": "integer"
+								},
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"quality": {
+									"type": "integer"
+								},
+								"contribution": {
+									"type": "integer"
+								}
+							}
+						},
+						"KSPI": {
+							"type": "object",
+							"properties": {
+								"distance": {
+									"type": "integer"
+								},
+								"latitude": {
+									"type": "number"
+								},
+								"longitude": {
+									"type": "number"
+								},
+								"useCount": {
+									"type": "integer"
+								},
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"quality": {
+									"type": "integer"
+								},
+								"contribution": {
+									"type": "integer"
+								}
+							}
+						},
+						"KDEC": {
+							"type": "object",
+							"properties": {
+								"distance": {
+									"type": "integer"
+								},
+								"latitude": {
+									"type": "number"
+								},
+								"longitude": {
+									"type": "number"
+								},
+								"useCount": {
+									"type": "integer"
+								},
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"quality": {
+									"type": "integer"
+								},
+								"contribution": {
+									"type": "integer"
+								}
+							}
+						},
+						"KAAA": {
+							"type": "object",
+							"properties": {
+								"distance": {
+									"type": "integer"
+								},
+								"latitude": {
+									"type": "number"
+								},
+								"longitude": {
+									"type": "number"
+								},
+								"useCount": {
+									"type": "integer"
+								},
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"quality": {
+									"type": "integer"
+								},
+								"contribution": {
+									"type": "integer"
+								}
+							}
+						},
+						"KIJX": {
+							"type": "object",
+							"properties": {
+								"distance": {
+									"type": "integer"
+								},
+								"latitude": {
+									"type": "number"
+								},
+								"longitude": {
+									"type": "number"
+								},
+								"useCount": {
+									"type": "integer"
+								},
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"quality": {
+									"type": "integer"
+								},
+								"contribution": {
+									"type": "integer"
+								}
+							}
+						},
+						"F4825": {
+							"type": "object",
+							"properties": {
+								"distance": {
+									"type": "integer"
+								},
+								"latitude": {
+									"type": "number"
+								},
+								"longitude": {
+									"type": "number"
+								},
+								"useCount": {
+									"type": "integer"
+								},
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"quality": {
+									"type": "integer"
+								},
+								"contribution": {
+									"type": "integer"
+								}
+							}
+						}
+					}
+				},
+				"currentConditions": {
+					"type": "object",
+					"properties": {
+						"datetime": {
+							"type": "string"
+						},
+						"datetimeEpoch": {
+							"type": "integer"
+						},
+						"temp": {
+							"type": "number"
+						},
+						"feelslike": {
+							"type": "number"
+						},
+						"humidity": {
+							"type": "number"
+						},
+						"dew": {
+							"type": "number"
+						},
+						"precip": {
+							"type": "integer"
+						},
+						"precipprob": {
+							"type": "null"
+						},
+						"snow": {
+							"type": "null"
+						},
+						"snowdepth": {
+							"type": "integer"
+						},
+						"preciptype": {
+							"type": "null"
+						},
+						"windgust": {
+							"type": "number"
+						},
+						"windspeed": {
+							"type": "number"
+						},
+						"winddir": {
+							"type": "integer"
+						},
+						"pressure": {
+							"type": "integer"
+						},
+						"visibility": {
+							"type": "number"
+						},
+						"cloudcover": {
+							"type": "integer"
+						},
+						"solarradiation": {
+							"type": "null"
+						},
+						"solarenergy": {
+							"type": "null"
+						},
+						"uvindex": {
+							"type": "null"
+						},
+						"conditions": {
+							"type": "string"
+						},
+						"icon": {
+							"type": "string"
+						},
+						"stations": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"sunrise": {
+							"type": "string"
+						},
+						"sunriseEpoch": {
+							"type": "integer"
+						},
+						"sunset": {
+							"type": "string"
+						},
+						"sunsetEpoch": {
+							"type": "integer"
+						},
+						"moonphase": {
+							"type": "number"
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "DSAzureSqlTableukg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseukg",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}

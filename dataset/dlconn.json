@@ -1,0 +1,32 @@
+{
+	"name": "dlconn",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageukg",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": "Raw_Zone/dineshpoc/rawzone/input",
+				"fileSystem": "ukgdatalakefspoc"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
